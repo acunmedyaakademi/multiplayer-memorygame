@@ -1,8 +1,17 @@
 import "../assets/css/Login.css";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+
+import { DataContext } from "../App";
+import { supabase } from "../../supabaseClient";
 
 export default function Login() {
+  const { loginSession } = useContext(DataContext);
+  if (loginSession) {
+    location.hash = "/home";
+    return null;
+  }
+
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     username: "",
@@ -15,14 +24,33 @@ export default function Login() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isLogin) {
-      console.log("Login attempt:", { email: formData.email, password: formData.password });
-      // Implement login logic here
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
+      if (error) {
+        console.error("Error signing in:", error);
+      } else {
+        console.log("Sign in successful:", data);
+      }
     } else {
-      console.log("Registration attempt:", formData);
-      // Implement registration logic here
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            username: formData.username,
+          },
+        },
+      });
+      if (error) {
+        console.error("Error signing up:", error);
+      } else {
+        console.log("Sign up successful:", data);
+      }
     }
   };
 

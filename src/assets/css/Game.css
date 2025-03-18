@@ -1,0 +1,94 @@
+/* .container {
+  padding: 24px;
+} */
+.game-header {
+  padding-inline: 24px;
+  margin-top: 24px;
+  margin-bottom: 85px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h1 {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    color: #152938;
+  }
+  .container-btns-area {
+    h4 {
+      width: 78px;
+      height: 40px;
+      padding-block: 10px;
+      border-radius: 26px;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 100%;
+      text-align: center;
+      color: #FCFCFC;
+      background-color: #FDA214;
+      cursor: pointer;
+    }
+    dialog {
+      margin: auto;
+      border-color: transparent;
+      border-radius: 10px;
+      form {
+        width: 327px;
+        height: 224px;
+        padding: 24px;
+        display: grid;
+        gap: 16px;
+        button {
+          height: 48px;
+          border-radius: 26px;
+          background-color: #DFE7EC;
+          border-color: transparent;
+          &:focus {
+            background-color: #FDA214;
+            color: #FCFCFC;
+          }
+        }
+        
+      }
+    }
+  }
+}
+.game-hero {
+  padding-inline: 24px;
+  margin-bottom: 94px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+  button {
+    width: 73px;
+    height: 73px;
+    border-radius: 59px;
+    border-color: transparent;
+    background-color: #304859;
+  }
+}
+.game-player-scores {
+  padding-inline: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  .p1, .p2, .p3, .p4 {
+    border-radius: 5px;
+    text-align: center;
+    width: 64px;
+    background-color: #DFE7EC;
+    padding: 14px 10px;
+    font-weight: 700;
+    line-height: 100%;
+    text-align: center;
+    h2 {
+      font-size: 15px;
+      color: #7191A5;
+      margin-bottom: 4px;
+    }
+    h1 {
+      font-size: 24px;
+      letter-spacing: 0px;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import Game from "./components/Game";
 import Home from "./components/Home";
+import Login from "./components/Login";
 
 const routers = [
   {
@@ -9,6 +10,10 @@ const routers = [
   {
     url: "/game",
     component: <Game />,
+  },
+  {
+    url: "/login",
+    component: <Login />,
   },
 ];
 

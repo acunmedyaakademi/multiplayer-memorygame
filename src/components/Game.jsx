@@ -1,28 +1,17 @@
-import { useRef, useState, useEffect } from 'react';
-import '../assets/css/Game.css'
+import "../assets/css/Game.css";
+
+import { useEffect, useRef, useState } from "react";
 
 export default function Game() {
-  const [isVisible, setVisible] = useState(false);
-  const [isBigger, setBigger] = useState(false);
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
   const dialogRef = useRef(null);
 
   useEffect(() => {
-    handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", setScreenSize(window.innerWidth));
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", setScreenSize(window.innerWidth));
     };
   }, []);
-
-  function handleResize() {
-    if (window.innerWidth >= 768) {
-      setVisible(true);
-      setBigger(true);
-    } else {
-      setVisible(false);
-      setBigger(false);
-    }
-  }
 
   function handleClick() {
     dialogRef.current.showModal();
@@ -32,12 +21,12 @@ export default function Game() {
     <div className="game-container">
       <div className="game-header">
         <h1>memory</h1>
-        {isVisible ?
+        {screenSize > 768 ? (
           <div className="container-btns-large-area">
-            <button className='restartBtn'>Restart</button>
-            <button className='newGameBtn'>New Game</button>
+            <button className="restartBtn">Restart</button>
+            <button className="newGameBtn">New Game</button>
           </div>
-          :
+        ) : (
           <div className="container-btns-area">
             <h4 onClick={handleClick}>Menu</h4>
             <dialog ref={dialogRef}>
@@ -48,7 +37,7 @@ export default function Game() {
               </form>
             </dialog>
           </div>
-        }
+        )}
       </div>
       <div className="game-hero">
         <button>1</button>
@@ -69,7 +58,7 @@ export default function Game() {
         <button>8</button>
       </div>
       <div className="game-player-scores">
-        {isBigger ?
+        {screenSize > 768 ? (
           <>
             <div className="p1-bigger">
               <h2>Player 1</h2>
@@ -88,7 +77,7 @@ export default function Game() {
               <h1>0</h1>
             </div>
           </>
-          :
+        ) : (
           <>
             <div className="p1">
               <h2>P1</h2>
@@ -107,8 +96,8 @@ export default function Game() {
               <h1>0</h1>
             </div>
           </>
-        }
+        )}
       </div>
-      </div>
-      );
+    </div>
+  );
 }

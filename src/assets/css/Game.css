@@ -2,74 +2,6 @@
   margin-inline: auto;
 }
 
-.game-header {
-  padding-inline: 24px;
-  margin-top: 24px;
-  margin-bottom: 85px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  h1 {
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 100%;
-    color: #152938;
-  }
-
-  .container-btns-area {
-    h4 {
-      width: 78px;
-      height: 40px;
-      padding-block: 10px;
-      border-radius: 26px;
-      font-weight: 700;
-      font-size: 16px;
-      line-height: 100%;
-      text-align: center;
-      color: #fcfcfc;
-      background-color: #fda214;
-      cursor: pointer;
-    }
-
-    dialog {
-      margin: auto;
-      border: none;
-      border-radius: 10px;
-      width: calc(100% - 48px);
-      max-width: 654px;
-
-      &::backdrop {
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-
-      form {
-        display: grid;
-        width: 100%;
-        padding: 24px;
-        gap: 16px;
-
-        button {
-          width: 100%;
-          height: 48px;
-          border-radius: 26px;
-          background-color: #dfe7ec;
-          border-color: transparent;
-          font-weight: 700;
-          font-size: 18px;
-          line-height: 100%;
-          color: #304859;
-
-          &:first-child {
-            background-color: #fda214;
-            color: #fcfcfc;
-          }
-        }
-      }
-    }
-  }
-}
-
 .game-hero {
   justify-content: center;
   padding-inline: 24px;
@@ -123,49 +55,6 @@
 @media (min-width: 768px) {
   .game-container {
     max-width: 768px;
-  }
-
-  .game-header {
-    padding-inline: 39px;
-    margin-top: 37px;
-    margin-bottom: 157px;
-
-    h1 {
-      font-size: 40px;
-    }
-
-    .container-btns-large-area {
-      display: flex;
-      gap: 16px;
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 100%;
-      text-align: center;
-      height: 52px;
-    }
-
-    button {
-      border-radius: 26px;
-      border-color: transparent;
-      padding-block: 13px;
-    }
-
-    .restartBtn {
-      padding-inline: 28px;
-      color: #fcfcfc;
-      background-color: #fda214;
-    }
-
-    .newGameBtn {
-      padding-inline: 24px;
-      color: #304859;
-      background-color: #dfe7ec;
-
-      &:focus {
-        background-color: #6395b8;
-        color: #fcfcfc;
-      }
-    }
   }
 
   .game-hero {

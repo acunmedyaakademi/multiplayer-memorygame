@@ -1,44 +1,14 @@
 import "../assets/css/Game.css";
 
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+
+import { DataContext } from "../App";
 
 export default function Game() {
-  const [screenSize, setScreenSize] = useState(window.innerWidth);
-  const dialogRef = useRef(null);
-
-  useEffect(() => {
-    window.addEventListener("resize", setScreenSize(window.innerWidth));
-    return () => {
-      window.removeEventListener("resize", setScreenSize(window.innerWidth));
-    };
-  }, []);
-
-  function handleClick() {
-    dialogRef.current.showModal();
-  }
+  const { screenSize } = useContext(DataContext);
 
   return (
     <div className="game-container">
-      <div className="game-header">
-        <h1>memory</h1>
-        {screenSize > 768 ? (
-          <div className="container-btns-large-area">
-            <button className="restartBtn">Restart</button>
-            <button className="newGameBtn">New Game</button>
-          </div>
-        ) : (
-          <div className="container-btns-area">
-            <h4 onClick={handleClick}>Menu</h4>
-            <dialog ref={dialogRef}>
-              <form method="dialog">
-                <button>Restart</button>
-                <button>New Game</button>
-                <button>Resume Game</button>
-              </form>
-            </dialog>
-          </div>
-        )}
-      </div>
       <div className="game-hero">
         <button>1</button>
         <button>2</button>

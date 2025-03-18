@@ -1,5 +1,6 @@
 import "../assets/css/Home.css";
 
+import { supabase } from "../../supabaseClient";
 import { useState } from "react";
 
 const gameProps = [

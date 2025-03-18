@@ -1,37 +1,107 @@
 import "../assets/css/Home.css";
 
-import { supabase } from "../../supabaseClient";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-const gameProps = [
-  {
-    id: 1,
-    title: "Select Theme",
-    options: ["Numbers", "Icons"],
-  },
-  {
-    id: 2,
-    title: "Numbers of Players",
-    options: [1, 2, 3, 4],
-  },
-  {
-    id: 3,
-    title: "Grid Size",
-    options: ["4x4", "6x6"],
-  },
-];
+import { DataContext } from "../App";
+import { supabase } from "../../supabaseClient";
 
 export default function Home() {
+  const { loginSession } = useContext(DataContext);
+  const [gameProps, setGameProps] = useState([
+    {
+      id: 2,
+      title: "Numbers of Players",
+      options: [
+        { id: 1, option: 1 },
+        { id: 2, option: 2 },
+        { id: 3, option: 3 },
+        { id: 4, option: 4 },
+      ],
+    },
+  ]);
+
+  const [selectedOpt, setSelectedOpt] = useState({
+    selected_theme: 1,
+    max_participants: 1,
+    grid_size: 1,
+  });
+
+  useEffect(() => {
+    supabase
+      .from("themes")
+      .select("*")
+      .order("id", { ascending: true })
+      .then(({ data, error }) => {
+        if (error) {
+          console.error("Error fetching themes:", error);
+        } else {
+          setGameProps((prevProps) => {
+            return [
+              ...prevProps,
+              {
+                id: 1,
+                title: "Select Theme",
+                options: [...data],
+              },
+            ];
+          });
+        }
+      });
+
+    supabase
+      .from("gridTypes")
+      .select("*")
+      .order("id", { ascending: true })
+      .then(({ data, error }) => {
+        if (error) {
+          console.error("Error fetching grid types:", error);
+        } else {
+          setGameProps((prevProps) => {
+            return [
+              ...prevProps,
+              {
+                id: 3,
+                title: "Grid Size",
+                options: [...data],
+              },
+            ];
+          });
+        }
+      });
+  }, []);
+
+  const handleCreateRoom = () => {
+    supabase
+      .from("rooms")
+      .insert({
+        name: "Room by " + loginSession.user.user_metadata.username,
+        selected_theme: selectedOpt.selected_theme,
+        max_participants: selectedOpt.max_participants,
+        grid_size: selectedOpt.grid_size,
+      })
+      .then(({ data, error }) => {
+        if (error) {
+          console.error("Error creating room:", error);
+        } else {
+          console.log("Room created successfully:", data);
+        }
+      });
+  };
+
   return (
     <main className="home-main">
       <div className="home-container">
         <h2>memory</h2>
         <div className="home-select-game-props">
-          {gameProps.map((gameProp) => (
-            <GameProp key={gameProp.id} {...gameProp} />
-          ))}
+          {gameProps
+            .sort((a, b) => a.id - b.id)
+            .map((gameProp) => (
+              <GameProp key={gameProp.id} {...gameProp} selectedOpt={selectedOpt} setSelectedOpt={setSelectedOpt} />
+            ))}
           <div className="home-rooms-btns">
-            <button className="home-create-room-btn">Create Room</button>
+            <button className="home-create-room-btn" onClick={handleCreateRoom}>
+              Create Room
+            </button>
             <button className="home-join-room-btn">Join Room</button>
           </div>
         </div>
@@ -40,13 +110,7 @@ export default function Home() {
   );
 }
 
-const GameProp = ({ id, title, options }) => {
-  const [selectedOpt, setSelectedOpt] = useState({
-    selected_theme: "Numbers",
-    max_participants: 1,
-    grid_size: "4x4",
-  });
-
+const GameProp = ({ id, title, options, selectedOpt, setSelectedOpt }) => {
   const getOpt = (propId) => {
     switch (propId) {
       case 1:
@@ -86,11 +150,11 @@ const GameProp = ({ id, title, options }) => {
       <div className="home-game-prop-item-btns">
         {options.map((option) => (
           <button
-            key={option}
-            className={getOpt(id).value === option ? "active" : null}
-            onClick={() => setOpt(id, option)}
+            key={option.id}
+            className={getOpt(id).value === option.id ? "active" : null}
+            onClick={() => setOpt(id, option.id)}
           >
-            {option}
+            {option.option}
           </button>
         ))}
       </div>

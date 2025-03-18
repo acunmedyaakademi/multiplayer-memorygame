@@ -1,6 +1,7 @@
-/* .container {
-  padding: 24px;
-} */
+.game-container {
+  margin-inline: auto;
+}
+
 .game-header {
   padding-inline: 24px;
   margin-top: 24px;
@@ -8,12 +9,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   h1 {
     font-weight: 700;
     font-size: 24px;
     line-height: 100%;
     color: #152938;
   }
+
   .container-btns-area {
     h4 {
       width: 78px;
@@ -28,37 +31,47 @@
       background-color: #FDA214;
       cursor: pointer;
     }
+
     dialog {
       margin: auto;
       border-color: transparent;
       border-radius: 10px;
+
       form {
-        width: 327px;
+        width: 100%;
         height: 224px;
         padding: 24px;
         display: grid;
         gap: 16px;
+        overflow-x: hidden;
+
         button {
+          width: 279px;
           height: 48px;
           border-radius: 26px;
           background-color: #DFE7EC;
           border-color: transparent;
+
           &:focus {
             background-color: #FDA214;
+            border-color: transparent;
             color: #FCFCFC;
           }
         }
-        
+
       }
     }
   }
 }
+
 .game-hero {
+  justify-content: center;
   padding-inline: 24px;
   margin-bottom: 94px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, max-content);
   gap: 13px;
+
   button {
     width: 73px;
     height: 73px;
@@ -67,12 +80,17 @@
     background-color: #304859;
   }
 }
+
 .game-player-scores {
   padding-inline: 24px;
   margin-bottom: 24px;
   display: flex;
   justify-content: space-between;
-  .p1, .p2, .p3, .p4 {
+
+  .p1,
+  .p2,
+  .p3,
+  .p4 {
     border-radius: 5px;
     text-align: center;
     width: 64px;
@@ -81,14 +99,112 @@
     font-weight: 700;
     line-height: 100%;
     text-align: center;
+
     h2 {
       font-size: 15px;
       color: #7191A5;
       margin-bottom: 4px;
     }
+
     h1 {
       font-size: 24px;
       letter-spacing: 0px;
     }
   }
 }
+
+@media (min-width : 768px) {
+  .game-container {
+    max-width: 768px;
+  }
+
+  .game-header {
+    padding-inline: 39px;
+    margin-top: 37px;
+    margin-bottom: 157px;
+
+    h1 {
+      font-size: 40px;
+    }
+
+    .container-btns-large-area {
+      display: flex;
+      gap: 16px;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 100%;
+      text-align: center;
+      height: 52px;
+    }
+
+    button {
+      border-radius: 26px;
+      border-color: transparent;
+      padding-block: 13px;
+    }
+
+    .restartBtn {
+      padding-inline: 28px;
+      color: #FCFCFC;
+      background-color: #FDA214;
+    }
+
+    .newGameBtn {
+      padding-inline: 24px;
+      color: #304859;
+      background-color: #DFE7EC;
+
+      &:focus {
+        background-color: #6395B8;
+        color: #FCFCFC;
+      }
+    }
+  }
+
+  .game-hero {
+    padding-inline: 118px;
+
+    button {
+      width: 118px;
+      height: 118px;
+    }
+  }
+
+  .game-player-scores {
+    padding-inline: 39px;
+    .p1-bigger, .p2-bigger, .p3-bigger, .p4-bigger {
+      width: 164px;
+      text-align: left;
+      padding: 14px 103px 12px 16px;
+      font-weight: 700;
+      line-height: 100%;
+      text-align: left;
+      background-color: #DFE7EC;
+      border-radius: 10px;
+      h2 {
+        width: 59px;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 100%;
+        color: #7191A5;
+        margin-bottom: 9px;
+      }
+
+      h1 {
+        font-size: 24px;
+        letter-spacing: 0px;
+      }
+    }
+  }
+}
+@media (min-width : 1024px) {
+  .game-container {
+    max-width: 1024px;
+  }
+
+  .game-header {
+    padding-inline: 165px;
+    margin-top: 68px;
+    margin-bottom: 108px;
+  }
+ }

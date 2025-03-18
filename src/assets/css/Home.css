@@ -65,8 +65,14 @@
   }
 }
 
-.home-start-btn {
-  background-color: #fda214;
+.home-rooms-btns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.home-create-room-btn,
+.home-join-room-btn {
   padding: 13px;
   color: #fcfcfc;
   font-weight: 700;
@@ -75,8 +81,18 @@
   border: none;
   border-radius: 26px;
   transition: background-color 0.3s;
+}
 
+.home-create-room-btn {
+  background-color: #fda214;
   &:hover {
     background-color: #ffb84a;
+  }
+}
+
+.home-join-room-btn {
+  background-color: #22a443;
+  &:hover {
+    background-color: #4cd67a;
   }
 }

@@ -30,7 +30,10 @@ export default function Home() {
           {gameProps.map((gameProp) => (
             <GameProp key={gameProp.id} {...gameProp} />
           ))}
-          <button className="home-start-btn">Start Game</button>
+          <div className="home-rooms-btns">
+            <button className="home-create-room-btn">Create Room</button>
+            <button className="home-join-room-btn">Join Room</button>
+          </div>
         </div>
       </div>
     </main>
@@ -39,31 +42,31 @@ export default function Home() {
 
 const GameProp = ({ id, title, options }) => {
   const [selectedOpt, setSelectedOpt] = useState({
-    theme: "Numbers",
-    players: 1,
-    gridSize: "4x4",
+    selected_theme: "Numbers",
+    max_participants: 1,
+    grid_size: "4x4",
   });
 
   const getOpt = (propId) => {
     switch (propId) {
       case 1:
         return {
-          key: "theme",
-          value: selectedOpt.theme,
+          key: "selected_theme",
+          value: selectedOpt.selected_theme,
         };
         break;
 
       case 2:
         return {
-          key: "players",
-          value: selectedOpt.players,
+          key: "max_participants",
+          value: selectedOpt.max_participants,
         };
         break;
 
       case 3:
         return {
-          key: "gridSize",
-          value: selectedOpt.gridSize,
+          key: "grid_size",
+          value: selectedOpt.grid_size,
         };
         break;
 

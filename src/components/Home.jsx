@@ -1,12 +1,14 @@
 import "../assets/css/Home.css";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import { DataContext } from "../App";
+import JoinRoomModal from "./Modals/JoinRoom";
 import { supabase } from "../../supabaseClient";
 
 export default function Home() {
   const { loginSession } = useContext(DataContext);
+  const joinRoomDialogRef = useRef();
   const [gameProps, setGameProps] = useState([
     {
       id: 2,
@@ -90,6 +92,7 @@ export default function Home() {
 
   return (
     <main className="home-main">
+      <JoinRoomModal joinRoomDialogRef={joinRoomDialogRef} />
       <div className="home-container">
         <h2>memory</h2>
         <div className="home-select-game-props">
@@ -102,7 +105,9 @@ export default function Home() {
             <button className="home-create-room-btn" onClick={handleCreateRoom}>
               Create Room
             </button>
-            <button className="home-join-room-btn">Join Room</button>
+            <button className="home-join-room-btn" onClick={() => joinRoomDialogRef.current.showModal()}>
+              Join Room
+            </button>
           </div>
         </div>
       </div>
